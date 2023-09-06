@@ -10,17 +10,15 @@ export default function CoursePage() {
   return (
     <>
       <Head>
-        <title>Cursos</title>
+        <title>Salas</title>
       </Head>
       <PageContainer>
         <SideMenu />
         <PageContent>
-          <HeaderTitle>Cadastrar Curso</HeaderTitle>
+          <HeaderTitle>Cadastrar Sala</HeaderTitle>
           <CourseFormContainer>
             <TextField label="Nome" />
-            <TextField label="Tipo" />
-            <TextField label="Carga Horária" />
-            <TextField type="file" />
+            <TextField label="Curso" />
           </CourseFormContainer>
           <CourseButtonContainer>
             <LargeButton variant="outlined">Cancelar</LargeButton>

@@ -20,7 +20,7 @@ export default function StudentsPage() {
             <TextField label="Nome" />
             <TextField label="Email" />
             <TextField label="Telefone" />
-            <TextField label="CPF" />
+            <TextField label="Usuário" />
             <TextField label="Curso" />
             <TextField label="Período de Ingresso" />
             <TextField label="Endereço" />

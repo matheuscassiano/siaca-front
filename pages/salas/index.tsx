@@ -10,29 +10,29 @@ import Head from "next/head";
 export default function CoursePage() {
   const courses = [
     {
-      title: "Sistemas de Informação",
-      description: "Superior",
+      title: "Lab - 108",
+      subtitle: "Sistemas de Informação",
     },
     {
-      title: "Hotelaria",
-      description: "Superior",
+      title: "Lab - 109",
+      subtitle: "Sistemas de Informação",
     },
     {
-      title: "Matemática",
-      description: "Superior",
+      title: "Lab - 110",
+      subtitle: "Sistemas de Informação",
     },
   ];
 
   return (
     <>
       <Head>
-        <title>Cursos</title>
+        <title>Salas</title>
       </Head>
       <PageContainer>
         <SideMenu />
         <PageContent>
           <section>
-            <HeaderTitle>Cursos</HeaderTitle>
+            <HeaderTitle>Salas</HeaderTitle>
             <SearchField label="Pesquisa" />
             <List items={courses} />
           </section>
