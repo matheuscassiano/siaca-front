@@ -5,8 +5,11 @@ import { TextField } from "@mui/material";
 import Head from "next/head";
 import { StudentButtonContainer, StudentFormContainer } from "./styles";
 import LargeButton from "@/styles/LargeButton";
+import { useRouter } from "next/router";
 
 export default function StudentsPage() {
+  const router = useRouter();
+  
   return (
     <>
       <Head>
@@ -29,7 +32,7 @@ export default function StudentsPage() {
             <TextField label="Estado" />
           </StudentFormContainer>
           <StudentButtonContainer>
-            <LargeButton variant="outlined">Cancelar</LargeButton>
+            <LargeButton variant="outlined" onClick={() => router.push("/alunos")}>Cancelar</LargeButton>
             <LargeButton variant="contained">Salvar</LargeButton>
           </StudentButtonContainer>
         </PageContent>

@@ -2,31 +2,12 @@ import { List } from "@/components/List";
 import SideMenu from "@/components/SideMenu";
 import { HeaderTitle } from "@/styles/HeaderTitle";
 import { PageContainer, PageContent } from "@/styles/Page";
+import httpRequest from "@/utils/requests";
 import Head from "next/head";
+import { useEffect, useState } from "react";
 
 export default function HomePage() {
-  const disciplines = [
-    {
-      title: "Sistemas Operacionais",
-    },
-    {
-      title: "Disciplina 2",
-    },
-    {
-      title: "Disciplina 3",
-    },
-    {
-      title: "Sistemas Operacionais",
-    },
-    {
-      title: "Disciplina 2",
-    },
-    {
-      title: "Disciplina 3",
-    },
-    {
-      title: "Sistemas Operacionais",
-    },
+  const subjects = [
     {
       title: "Disciplina 2",
     },
@@ -34,6 +15,26 @@ export default function HomePage() {
       title: "Disciplina 3",
     },
   ];
+  // const [subjects, setSubjects] = useState([]);
+
+  // useEffect(() => {
+  //   httpRequest({
+  //     method: "GET",
+  //     route: "coordenacao/listas-disciplinas/",
+  //   })
+  //     .then((response) => {
+  //       if (response) {
+  //         setSubjects(
+  //           response.map((classroom: { descricao: string }) => ({
+  //             title: classroom.descricao,
+  //           }))
+  //         );
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // }, []);
 
   const tasks = [
     {
@@ -123,13 +124,13 @@ export default function HomePage() {
         <PageContent>
           <section>
             <HeaderTitle>Disciplinas</HeaderTitle>
-            <List items={disciplines} />
+            <List items={subjects} />
           </section>
           <br />
-          <section>
+          {/* <section>
             <HeaderTitle>Atividades pendentes</HeaderTitle>
             <List items={tasks} />
-          </section>
+          </section> */}
         </PageContent>
       </PageContainer>
     </>

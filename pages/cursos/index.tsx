@@ -5,58 +5,64 @@ import AddButton from "@/styles/AddButton";
 import { HeaderTitle } from "@/styles/HeaderTitle";
 import { PageContainer, PageContent } from "@/styles/Page";
 import SearchField from "@/styles/SearchField";
+import httpRequest from "@/utils/requests";
 import { Add } from "@mui/icons-material";
+import { Alert, Snackbar } from "@mui/material";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 export default function CoursePage() {
-  const [courses, setCourses] = useState([]);
+  const [courses, setCourses] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [message, setMessage] = useState("");
+
+  const router = useRouter();
+
+  const handleClose = (_?: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setMessage("");
+  };
 
   useEffect(() => {
-    const fetchCourses = async () => {
-      try {
-        const token = localStorage.getItem("access");
-        if (!token) {
-          console.error("No access token found.");
-          return;
-        }
-
-        const headers = {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        };
-        const response = await fetch(
-          "http://localhost:8000/coordenacao/curso/",
-          { headers }
+    httpRequest({
+      method: "GET",
+      route: "coordenacao/curso/",
+      setLoading: setLoading,
+    })
+      .then((response) => {
+        setCourses(
+          response.map((course: any) => ({
+            id: course.id,
+            title: course.nome,
+            subtitle: `Descrição: ${course.descricao}`,
+          }))
         );
-        if (response.ok) {
-          const data = await response.json();
-          setCourses(
-            data.map(
-              (course: {
-                nome: string;
-                ementa: string;
-                descricao: string;
-              }) => ({
-                title: course.nome,
-                // subtitle: `Ementa: ${course.ementa}`,
-                subtitle: `Descrição: ${course.descricao}`,
-              })
-            )
-          );
-        } else {
-          console.error("Failed to fetch courses");
-        }
-      } catch (error) {
-        console.error("Error fetching courses:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchCourses();
+      })
+      .catch((error) => setMessage(error));
   }, []);
+
+  const moreMenu = [
+    {
+      title: "Remover",
+      exec: (id: number) => {
+        httpRequest({
+          method: "DELETE",
+          route: `coordenacao/curso/${id}/`,
+          setLoading: setLoading,
+        })
+          .then(() => setCourses(courses.filter((res) => res.id !== id)))
+          .catch((error) => setMessage(error));
+      },
+    },
+    {
+      title: "Curso",
+      exec: (id: number) => router.push(`/cursos/${id}`),
+    },
+  ];
 
   return (
     <>
@@ -69,13 +75,32 @@ export default function CoursePage() {
           <section>
             <HeaderTitle>Cursos</HeaderTitle>
             <SearchField label="Pesquisa" />
-            {loading ? <Loading /> : <List items={courses} />}
+            {loading ? (
+              <Loading />
+            ) : (
+              <List items={courses} moreMenu={moreMenu} />
+            )}
           </section>
-          <AddButton color="primary" aria-label="add">
+          <AddButton
+            className="add-course-buttton"
+            color="primary"
+            aria-label="add"
+            onClick={() => router.push("/cursos/cadastro")}
+          >
             <Add />
           </AddButton>
         </PageContent>
       </PageContainer>
+      <Snackbar
+        open={!!message}
+        autoHideDuration={5000}
+        onClose={handleClose}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      >
+        <Alert severity="error" onClose={handleClose} sx={{ width: "100%" }}>
+          {message}
+        </Alert>
+      </Snackbar>
     </>
   );
 }

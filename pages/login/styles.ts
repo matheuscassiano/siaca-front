@@ -64,3 +64,5 @@ export const LoginCover = styled.img`
   height: calc(100vh - 0.75em);
   object-fit: cover;
 `;
+
+export default PageContainer;
