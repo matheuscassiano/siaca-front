@@ -60,7 +60,6 @@ export const MenuFooterContainer = styled.div`
 export const MenuFooter = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 1em;
   margin: 1.2em 0 0.8em;
   padding-top: 1.5em;
