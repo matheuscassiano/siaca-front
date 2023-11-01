@@ -25,10 +25,15 @@
     "react-dom": "18.2.0",
     "react-feather": "^2.0.10",
     "react-text-mask": "^5.5.0",
-    "styled-components": "^6.0.6",
+    "styled-components": "^6.0.8",
     "typescript": "5.1.6"
   },
   "devDependencies": {
-    "babel-plugin-styled-components": "^2.1.4"
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "eslint": "latest",
+    "eslint-config-next": "latest",
+    "typescript": "latest"
   }
 }
