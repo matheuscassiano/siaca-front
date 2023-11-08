@@ -13,7 +13,7 @@ export default function LoginPage() {
       </Head>
       <PageContainer>
         <LoginContainer>
-          <Title>Sistema Academico</Title>
+          <Title>Sistema Acadêmico</Title>
           {forgotPassword ? (
             <ForgotPasswordForm setForgotPassword={setForgotPassword} />
           ) : (

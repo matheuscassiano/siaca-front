@@ -6,8 +6,11 @@ import { PageContainer, PageContent } from "@/styles/Page";
 import SearchField from "@/styles/SearchField";
 import { Add } from "@mui/icons-material";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 export default function StudentsPage() {
+  const router = useRouter();
+
   const students = [
     {
       title: "Matheus Cassiano",
@@ -54,7 +57,11 @@ export default function StudentsPage() {
             <SearchField label="Pesquisa" />
             <List items={students} />
           </section>
-          <AddButton color="primary" aria-label="add">
+          <AddButton
+            color="primary"
+            aria-label="add"
+            onClick={() => router.push("/alunos/cadastro")}
+          >
             <Add />
           </AddButton>
         </PageContent>
